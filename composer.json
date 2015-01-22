@@ -1,0 +1,30 @@
+{
+    "name": "xuma/laravel-amaran",
+    "description": "Laravel 5 Notification",
+    "keywords": ["stylish", "laravel", "notification"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hakan ERSU",
+            "email": "hakanersu@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": ">=5.0.0"
+    },
+    "require-dev": {
+       
+    },
+    "autoload": {
+        "psr-0": {
+            "Xuma\\Amaran": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
