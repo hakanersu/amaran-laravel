@@ -62,20 +62,43 @@ Amaran::content([
     'message'=>'Hello World!'
 ])->create();
 ```
-You can use most [AmaranJS][1] functions as methods like :
+
+#### Using AmaranJS Functions
+It is enough your notification will fire at page load.You can use most [AmaranJS][1] functions as methods like :
 
 ```
 Amaran::content([
     'message'=>'Hello World!'
-])
-->position('top left')
-->inEffect('slideRight')
-->outEffect('slideBottom')
-->sticky(true)
-->create();
+])->position('top right')
+  ->inEffect('slideRight')
+  ->outEffect('slideBottom')
+  ->sticky(true)
+  ->create();
 ```
 
+#### Binding Javascript Events to Element
+You can define javascript events with `bind()` method
+```
+Amaran::content([
+    'message'=>'Hello World!'
+])->position('top right)
+  ->bind('#start','onclick')
+  ->create();
+```
+Theme Usage
+-----
 
+Theme usage is simple just set theme name and set content as theme template array.
+```
+Amaran::theme('awesome ok')
+    ->content([
+        'title'=>'My first funcy example!',
+        'message'=>'1.4 GB',
+        'info'=>'my_birthday.mp4',
+        'icon'=>'fa fa-download'
+    ])->create();
+```    
 
+> Little note if you want to use awesome theme you have to include font awesome.
 
 [1]: https://github.com/hakanersu/AmaranJS
