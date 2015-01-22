@@ -4,36 +4,46 @@ use Exception;
 class AmaranHandler{
 
     /**
-     * Default values of amaran array
+     * Default values of AmaranJS array
      * @var array
      */
     protected $amaran=['theme'=>'default','sticky'=>false];
 
     /**
-     *
+     * jQuery event creator
      * @var array
      */
     public $click=[];
 
     /**
-     * @var bool
+     * Content must be filled with AmaranJS theme values.
+     * Check documentation for AmaranJS themes.
+     * @var array
      */
-    public $content=false;
+    public $content=[];
+
+    /**
+     * @var ViewBinder
+     */
     protected $viewBinder;
+
+    /**
+     * @param ViewBinder $viewBinder
+     */
     public function __construct(ViewBinder $viewBinder)
     {
         $this->viewBinder = $viewBinder;
     }
 
     /**
-     * @return $this
+     * Bind AmaranJS to view.
      */
     public function create()
     {
         $script = "<script>\n\t$(function(){ \n\t\t";
         if($this->click)
         {
-            return $script."\t$('".$this->click[0]."').on('".$this->click[1]."',function(){ \n\t\t\t\t $.amaran(". json_encode($this->amaran).") \n\t\t\t}); \n\t\t});\n\t</script>\n";
+            $this->viewBinder->bind($script."\t$('".$this->click[0]."').on('".$this->click[1]."',function(){ \n\t\t\t\t $.amaran(". json_encode($this->amaran).") \n\t\t\t}); \n\t\t});\n\t</script>\n");
         }
         $this->viewBinder->bind($script."$.amaran(".json_encode($this->amaran)."); \n\t });\n</script>\n");
     }
@@ -60,7 +70,7 @@ class AmaranHandler{
     }
 
     /**
-     *  AmaranJS content for notification
+     * AmaranJS content for notification
      * @param string $content
      * @return $this
      */
@@ -92,6 +102,7 @@ class AmaranHandler{
     }
 
     /**
+     * AmaranJS dissapper effect
      * @param $outEffect
      * @return $this
      */
@@ -110,9 +121,7 @@ class AmaranHandler{
     public function bind($element=false,$on='click')
     {
         if(!$element) throw new Exception("AmaranJS throwed this exception with \"Please set onClick element.( eq ->bind('#example'))\"", 1);
-
         $this->click = [$element,$on];
         return $this;
     }
-
 }
