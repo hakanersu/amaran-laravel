@@ -10,15 +10,10 @@ class AmaranViewBinder implements ViewBinder {
     private $event;
 
     /**
-     * @var string
-     */
-    private $viewToBindVariables;
-
-    /**
      * @param Dispatcher $event
      * @param $viewToBindVariables
      */
-    function __construct(Dispatcher $event, $viewToBindVariables)
+    function __construct(Dispatcher $event)
     {
         $this->event = $event;
     }
@@ -31,9 +26,9 @@ class AmaranViewBinder implements ViewBinder {
      */
     public function bind($amaran)
     {
-        $this->event->listen("composing: {$this->viewToBindVariables}", function() use ($amaran)
+        $this->event->listen("composing: amaran::javascript", function() use ($amaran)
         {
-            echo "<script>{$amaran}</script>";
+            echo $amaran;
         });
     }
     

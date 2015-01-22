@@ -9,11 +9,6 @@ class AmaranHandler{
      */
     protected $amaran=['theme'=>'default','sticky'=>false];
 
-     /**
-     * @var ViewBinder
-     */
-    protected $viewBinder;
-
     /**
      *
      * @var array
@@ -24,17 +19,24 @@ class AmaranHandler{
      * @var bool
      */
     public $content=false;
-
+    protected $viewBinder;
     public function __construct(ViewBinder $viewBinder)
     {
         $this->viewBinder = $viewBinder;
     }
+
     /**
      * @return $this
      */
     public function create()
     {
-        $this->viewBinder->bind($this);
+        $script = "<script>\n\t$(function(){ \n\t\t";
+        if($this->click)
+        {
+            return $script."\t$('".$this->click[0]."').on('".$this->click[1]."',function(){ \n\t\t\t\t $.amaran(". json_encode($this->amaran).") \n\t\t\t}); \n\t\t});\n\t</script>\n";
+        }
+        $this->viewBinder->bind($script."$.amaran(".json_encode($this->amaran)."); \n\t });\n</script>\n");
+        return $this;
     }
 
     /**
@@ -113,21 +115,5 @@ class AmaranHandler{
         $this->click = [$element,$on];
         return $this;
     }
-    public function test()
-    {
-        return "Test";
-    }
 
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        $script = "<script> \n\t\t$(function(){ \n\t\t";
-        if($this->click)
-        {
-            return $script."\t$('".$this->click[0]."').on('".$this->click[1]."',function(){ \n\t\t\t\t $.amaran(". json_encode($this->amaran).") \n\t\t\t}); \n\t\t});\n\t</script>\n";
-        }
-        return $script."$.amaran(".json_encode($this->amaran)."); \n\t });\n</script>\n";
-    }
 }
