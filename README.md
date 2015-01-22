@@ -62,7 +62,8 @@ Amaran::content([
 ```
 
 #### Using AmaranJS Functions
-It is enough your notification will fire at page load.You can use most [AmaranJS][1] functions as methods like :
+
+You can use most [AmaranJS][1] functions as methods like :
 
 ```
 Amaran::content([
