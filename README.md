@@ -55,7 +55,25 @@ Example:
 Usage
 -----
 
-Usage is very simple.
+Usage is very simple.If you want to use default theme;
+
+```
+Amaran::content([
+    'message'=>'Hello World!'
+])->create();
+```
+You can use most [AmaranJS][1] functions as methods like :
+
+```
+Amaran::content([
+    'message'=>'Hello World!'
+])
+->position('top left')
+->inEffect('slideRight')
+->outEffect('slideBottom')
+->sticky(true)
+->create();
+```
 
 
 
