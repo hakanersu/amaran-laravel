@@ -36,7 +36,6 @@ class AmaranHandler{
             return $script."\t$('".$this->click[0]."').on('".$this->click[1]."',function(){ \n\t\t\t\t $.amaran(". json_encode($this->amaran).") \n\t\t\t}); \n\t\t});\n\t</script>\n";
         }
         $this->viewBinder->bind($script."$.amaran(".json_encode($this->amaran)."); \n\t });\n</script>\n");
-        return $this;
     }
 
     /**
