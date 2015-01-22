@@ -30,8 +30,6 @@ Once this operation is complete, simply add both the service provider and facade
 'Amaran' => 'Xuma\Amaran\Facades\Amaran'
 ```
 
-And that's it! 
-
 #### Installing AmaranJS jQuery Plugin
 
 Before starting download and extract your [AmaranJS][1] files to public/ directory and add necessary plugin files to your view.You can find installation documentation of [AmaranJS][1] [here][1].
@@ -99,6 +97,7 @@ Amaran::theme('awesome ok')
     ])->create();
 ```    
 
-> Little note if you want to use awesome theme you have to include font awesome.
+> Little note if you want to use awesome theme you have to include [font awesome][2].
 
 [1]: https://github.com/hakanersu/AmaranJS
+[2]: http://fortawesome.github.io/Font-Awesome/icons/
