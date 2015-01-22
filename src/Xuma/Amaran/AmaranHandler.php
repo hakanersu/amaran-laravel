@@ -9,6 +9,11 @@ class AmaranHandler{
      */
     protected $amaran=['theme'=>'default','sticky'=>false];
 
+     /**
+     * @var ViewBinder
+     */
+    protected $viewBinder;
+
     /**
      *
      * @var array
@@ -20,12 +25,16 @@ class AmaranHandler{
      */
     public $content=false;
 
+    public function __construct(ViewBinder $viewBinder)
+    {
+        $this->viewBinder = $viewBinder;
+    }
     /**
      * @return $this
      */
     public function create()
     {
-        return $this;
+        $this->viewBinder->bind($this);
     }
 
     /**
@@ -103,6 +112,10 @@ class AmaranHandler{
 
         $this->click = [$element,$on];
         return $this;
+    }
+    public function test()
+    {
+        return "Test";
     }
 
     /**
