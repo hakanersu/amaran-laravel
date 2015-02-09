@@ -81,7 +81,7 @@ You can define javascript events with `bind()` method
 Amaran::content([
     'message'=>'Hello World!'
 ])->position('top right)
-  ->bind('#start','onclick')
+  ->bind('#start','click')
   ->create();
 ```
 Theme Usage
