@@ -91,7 +91,12 @@ Amaran::content([
 #### Using as Flash Message
 Normally AmaranJS bind to current view but you can add ```->flash()``` method for bind to redirected view.
 
-```Amaran::content(['message'=>'Hello World'])->flash()->create();```
+```
+    Amaran::content([
+        'message'=>'Hello World'
+    ])->flash()
+      ->create();
+```
 
 Theme Usage
 -----
