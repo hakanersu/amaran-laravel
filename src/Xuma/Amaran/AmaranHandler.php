@@ -1,6 +1,6 @@
 <?php namespace Xuma\Amaran;
 use Exception;
-
+use Illuminate\Session\Store;
 class AmaranHandler{
 
     /**
@@ -27,12 +27,17 @@ class AmaranHandler{
      */
     protected $viewBinder;
 
+    protected $session;
+
+    protected $flash = false;
     /**
      * @param ViewBinder $viewBinder
      */
-    public function __construct(ViewBinder $viewBinder)
+    public function __construct(ViewBinder $viewBinder,Store $session)
     {
         $this->viewBinder = $viewBinder;
+
+        $this->session = $session;
     }
 
     /**
@@ -41,15 +46,25 @@ class AmaranHandler{
     public function create()
     {
         $script = "<script>\n\t$(function(){ \n\t\t";
+
         if($this->click)
         {
-            $this->viewBinder->bind($script."\t$('".$this->click[0]."').on('".$this->click[1]."',function(){ \n\t\t\t\t $.amaran(". json_encode($this->amaran).") \n\t\t\t}); \n\t\t});\n\t</script>\n");
+            $script.="\t$('".$this->click[0]."').on('".$this->click[1]."',function(){ \n\t\t\t\t $.amaran(". json_encode($this->amaran).") \n\t\t\t}); \n\t\t});\n\t</script>\n";
         }
         else
         {
-            $this->viewBinder->bind($script."$.amaran(".json_encode($this->amaran)."); \n\t });\n</script>\n");    
+            $script.="$.amaran(".json_encode($this->amaran)."); \n\t });\n</script>\n";
         }
-        
+
+        if($this->flash)
+        {
+            $this->session->flash('amaranjs.content',$script);
+        }
+        else 
+        {
+           $this->viewBinder->bind($script); 
+        }
+     
     }
 
     /**
@@ -113,6 +128,12 @@ class AmaranHandler{
     public function outEffect($outEffect)
     {
         $this->amaran['outEffect'] = $outEffect;
+        return $this;
+    }
+
+    public function flash()
+    {
+        $this->flash = true;
         return $this;
     }
 
