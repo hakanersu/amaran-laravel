@@ -10,7 +10,7 @@ Package Demo: http://ersu.me/laravel-amaranjs
 
 Installation
 ------------
-Begin by installing the package through Composer. Yyou can add your composer.json require section:
+Begin by installing the package through Composer. You can add your composer.json require section:
 ```
 "xuma/laravel-amaran": "~1.0@dev"
 ```
