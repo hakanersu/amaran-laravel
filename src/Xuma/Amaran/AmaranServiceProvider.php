@@ -46,7 +46,7 @@ class AmaranServiceProvider extends ServiceProvider
 			'Xuma\Amaran\AmaranViewBinder'
 		);
 
-		$this->app->bindShared('amaran', function($app) {
+		$this->app->singleton('amaran', function($app) {
 			$binder = new AmaranViewBinder($app['events']);
 			return $this->app->make('Xuma\Amaran\AmaranHandler');
 		});
