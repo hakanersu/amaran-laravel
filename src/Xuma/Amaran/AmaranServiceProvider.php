@@ -24,6 +24,13 @@ class AmaranServiceProvider extends ServiceProvider
 		$this->registerResources();
 	}
 
+	public function boot()
+	{
+		$this->publishes([
+		    __DIR__.'/Config/amaran.php' => config_path('amaran.php'),
+		]);
+	}
+
 	/**
 	 * Get the services provided by the provider.
 	 *
