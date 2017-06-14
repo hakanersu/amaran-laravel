@@ -1,35 +1,37 @@
-<?php namespace Xuma\Amaran;
+<?php 
+namespace Xuma\Amaran;
+
 use Exception;
 use Illuminate\Session\Store;
-class AmaranHandler{
+
+class AmaranHandler
+{
 
     /**
      * Default values of AmaranJS array
      * @var array
      */
-    protected $amaran=['theme'=>'default','sticky'=>false];
+    protected $amaran = ['theme' => 'default','sticky' => false];
 
     /**
      * jQuery event creator
      * @var array
      */
-    public $click=[];
+    public $click = [];
 
     /**
      * Content must be filled with AmaranJS theme values.
      * Check documentation for AmaranJS themes.
      * @var array
      */
-    public $content=[];
+    public $content = [];
 
-    /**
-     * @var ViewBinder
-     */
     protected $viewBinder;
 
     protected $session;
 
     protected $flash = false;
+
     /**
      * @param ViewBinder $viewBinder
      */
@@ -56,12 +58,9 @@ class AmaranHandler{
             $script.="$.amaran(".json_encode($this->amaran)."); \n\t });\n</script>\n";
         }
 
-        if($this->flash)
-        {
-            $this->session->flash('amaranjs.content',$script);
-        }
-        else 
-        {
+        if ($this->flash) {
+            $this->session->flash('amaranjs.content', $script);
+        } else {
            $this->viewBinder->bind($script); 
         }
      
@@ -71,9 +70,9 @@ class AmaranHandler{
      * @param string $theme
      * @return $this
      */
-    public function theme($theme='default')
+    public function theme($theme = 'default')
     {
-        $this->amaran['theme']=$theme;
+        $this->amaran['theme'] = $theme;
         return $this;
     }
 
@@ -82,9 +81,9 @@ class AmaranHandler{
      * @param string $position
      * @return $this
      */
-    public function position($position='bottom right')
+    public function position($position = 'bottom right')
     {
-        $this->amaran['position']=$position;
+        $this->amaran['position'] = $position;
         return $this;
     }
 
@@ -95,7 +94,7 @@ class AmaranHandler{
      */
     public function content($content)
     {
-        $this->amaran['content']=$content;
+        $this->amaran['content'] = $content;
         return $this;
     }
 
@@ -143,7 +142,7 @@ class AmaranHandler{
      * @return $this
      * @throws Exception
      */
-    public function bind($element=false,$on='click')
+    public function bind($element = false, $on = 'click')
     {
         if(!$element) throw new Exception("AmaranJS throwed this exception with \"Please set onClick element.( eq ->bind('#example'))\"", 1);
         $this->click = [$element,$on];

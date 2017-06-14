@@ -1,4 +1,5 @@
-<?php namespace Xuma\Amaran;
+<?php 
+namespace Xuma\Amaran;
 
 use Illuminate\Events\Dispatcher;
 

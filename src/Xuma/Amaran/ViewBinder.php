@@ -1,4 +1,6 @@
-<?php namespace Xuma\Amaran;
+<?php 
+
+namespace Xuma\Amaran;
 
 interface ViewBinder {
 
