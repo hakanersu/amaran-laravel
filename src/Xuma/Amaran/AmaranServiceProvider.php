@@ -28,10 +28,13 @@ class AmaranServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/Config/amaran.php' => config_path('amaran.php'),
             __DIR__.'/Assets/amaran.min.css' => public_path('/css/amaran.min.css'),
             __DIR__.'/Assets/jquery.amaran.min.js' => public_path('/js/jquery.amaran.min.js'),
-        ]);
+        ], 'assets');
+
+        $this->publishes([
+            __DIR__.'/Config/amaran.php' => config_path('amaran.php')
+        ], 'config');
     }
 
     /**
