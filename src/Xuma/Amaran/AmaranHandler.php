@@ -11,7 +11,10 @@ class AmaranHandler
      * Default values of AmaranJS array
      * @var array
      */
-    protected $amaran = ['theme' => 'default','sticky' => false];
+    protected $amaran = [
+        'theme' => 'default',
+        'sticky' => false
+    ];
 
     /**
      * jQuery event creator
@@ -32,14 +35,20 @@ class AmaranHandler
 
     protected $flash = false;
 
+
     /**
      * @param ViewBinder $viewBinder
+     * @param Store      $session
      */
-    public function __construct(ViewBinder $viewBinder,Store $session)
+    public function __construct(ViewBinder $viewBinder, Store $session)
     {
         $this->viewBinder = $viewBinder;
 
         $this->session = $session;
+
+        if (file_exists(config_path('amaran.php'))) {
+            $this->amaran = array_merge($this->amaran, config('amaran'));
+        }
     }
 
     /**
@@ -49,21 +58,18 @@ class AmaranHandler
     {
         $script = "<script>\n\t$(function(){ \n\t\t";
 
-        if($this->click)
-        {
-            $script.="\t$('".$this->click[0]."').on('".$this->click[1]."',function(){ \n\t\t\t\t $.amaran(". json_encode($this->amaran).") \n\t\t\t}); \n\t\t});\n\t</script>\n";
+        if ($this->click) {
+            $script .= "\t$('".$this->click[0]."').on('".$this->click[1]."',function(){ \n\t\t\t\t $.amaran(". json_encode($this->amaran).") \n\t\t\t}); \n\t\t});\n\t</script>\n";
+        } else {
+            $script .= "$.amaran(".json_encode($this->amaran)."); \n\t });\n</script>\n";
         }
-        else
-        {
-            $script.="$.amaran(".json_encode($this->amaran)."); \n\t });\n</script>\n";
-        }
+
 
         if ($this->flash) {
             $this->session->flash('amaranjs.content', $script);
         } else {
-           $this->viewBinder->bind($script); 
+            $this->viewBinder->bind($script);
         }
-     
     }
 
     /**
@@ -144,8 +150,12 @@ class AmaranHandler
      */
     public function bind($element = false, $on = 'click')
     {
-        if(!$element) throw new Exception("AmaranJS throwed this exception with \"Please set onClick element.( eq ->bind('#example'))\"", 1);
-        $this->click = [$element,$on];
+        if (!$element) {
+            throw new Exception("AmaranJS throwed this exception with \"Please set onClick element.( eq ->bind('#example'))\"", 1);
+        }
+
+        $this->click = [$element, $on];
+
         return $this;
     }
 }

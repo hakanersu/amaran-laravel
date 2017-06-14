@@ -3,18 +3,15 @@ namespace Xuma\Amaran;
 
 use Illuminate\Events\Dispatcher;
 
-class AmaranViewBinder implements ViewBinder {
+class AmaranViewBinder implements ViewBinder
+{
 
     /**
      * @var Dispatcher
      */
     private $event;
 
-    /**
-     * @param Dispatcher $event
-     * @param $viewToBindVariables
-     */
-    function __construct(Dispatcher $event)
+    public function __construct(Dispatcher $event)
     {
         $this->event = $event;
     }
@@ -27,10 +24,8 @@ class AmaranViewBinder implements ViewBinder {
      */
     public function bind($amaran)
     {
-        $this->event->listen("composing: amaran::javascript", function() use ($amaran)
-        {
+        $this->event->listen("composing: amaran::javascript", function () use ($amaran) {
             echo $amaran;
         });
     }
-    
 }
