@@ -4,7 +4,7 @@ AmaranJS Laravel 5 Package
 [![Source](http://img.shields.io/badge/source-hakanersu/amaranlaravel-blue.svg?style=flat-square)](https://github.com/hakanersu/amaran-laravel)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 
-[AmaranJS][1] L5 package is a Laravel wrapper for my jquery plugin [AmaranJS][1].You can create easy and stylish notifications with [AmaranJS][1]. 
+[AmaranJS][1] L5 package is a Laravel wrapper for my jquery plugin [AmaranJS][1].You can create easy and stylish notifications with [AmaranJS][1].
 
 Package Demo: http://ersu.me/laravel-amaranjs
 
@@ -12,7 +12,7 @@ Installation
 ------------
 Begin by installing the package through Composer. You can add your composer.json require section:
 ```json
-"xuma/laravel-amaran": "~1.0@dev"
+"xuma/laravel-amaran": "1.1.0"
 ```
 Don't forget to update `composer update`.
 
@@ -20,16 +20,32 @@ Once this operation is complete, simply add both the service provider and facade
 
 #### Service Provider
 ```php
-'Xuma\Amaran\AmaranServiceProvider'
+Xuma\Amaran\AmaranServiceProvider::class,
 ```
 #### Facade
 ```php
-'Amaran' => 'Xuma\Amaran\Facades\Amaran'
+'Amaran' => Xuma\Amaran\Facades\Amaran::class,
 ```
 
 #### Installing AmaranJS jQuery Plugin
 
-Before starting download and extract your [AmaranJS][1] files to public/ directory and add necessary plugin files to your view.You can find installation documentation of [AmaranJS][1] [here][1].
+You can choose to install AmaranJS manually or you can publish assets.
+
+If you choose install manually, extract your [AmaranJS][1] files to public/ directory. You can find installation documentation of [AmaranJS][1] [here][1].
+
+You can publish assets with below command and assets will be placed in /css, /js folders.
+
+```php
+php artisan vendor:publish --provider="Xuma\Amaran\AmaranServiceProvider" --tag="assets"
+```
+
+#### Default configuration.
+
+If you want to use same configuration by default you can use configuration file. You can publish configuration file with below command.
+
+```php
+php artisan vendor:publish --provider="Xuma\Amaran\AmaranServiceProvider" --tag="config"
+```
 
 #### Adding Output View
 
