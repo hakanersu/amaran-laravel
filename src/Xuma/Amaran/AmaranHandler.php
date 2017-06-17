@@ -47,7 +47,10 @@ class AmaranHandler
         $this->session = $session;
 
         if (file_exists(config_path('amaran.php'))) {
-            $this->amaran = array_merge($this->amaran, config('amaran'));
+            $this->amaran = array_merge($this->amaran, config('amaran.frontend', []));
+            if(config('amaran.backend.flash', false)) {
+                $this->flash();
+            }
         }
     }
 
